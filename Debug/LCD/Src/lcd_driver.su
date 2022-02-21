@@ -1,0 +1,5 @@
+lcd_driver.c:73:9:lcd_status_read	4	static
+lcd_driver.c:121:9:lcd_data_write	24	static,ignoring_inline_asm
+lcd_driver.c:170:9:lcd_cmd_write	24	static,ignoring_inline_asm
+lcd_driver.c:220:6:lcd_reset	8	static,ignoring_inline_asm
+lcd_driver.c:232:6:lcd_set_font	8	static

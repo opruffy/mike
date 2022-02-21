@@ -1,0 +1,4 @@
+usb.c:18:6:usb_statemachine	8	static
+usb.c:50:9:usb_ready	4	static
+usb.c:55:6:usb_update	8	static
+usb.c:63:6:usb_stop	8	static

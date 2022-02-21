@@ -1,0 +1,13 @@
+lcd_symbol.c:16:6:lcd_symbol_rect	32	static
+lcd_symbol.c:31:6:lcd_symbol_rect_inv	32	static
+lcd_symbol.c:46:6:lcd_symbol_rect_filled	32	static
+lcd_symbol.c:58:13:set_symbol_in_matrix	24	static
+lcd_symbol.c:76:16:get_symbol	16	static
+lcd_symbol.c:127:13:set_char_in_matrix	64	static
+lcd_symbol.c:137:13:set_symbol_in_matrix_inv	24	static
+lcd_symbol.c:155:13:set_char_in_matrix_inv	64	static
+lcd_symbol.c:165:6:lcd_symbol_string	16	static
+lcd_symbol.c:174:6:lcd_symbol_string_inv	16	static
+lcd_symbol.c:187:6:lcd_symbol_symb	24	static
+lcd_symbol.c:205:6:lcd_symbol_symb_inv	24	static
+lcd_symbol.c:223:6:lcd_symbol_symb_clear	24	static

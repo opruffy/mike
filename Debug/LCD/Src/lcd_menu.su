@@ -1,0 +1,7 @@
+lcd_menu.c:304:20:get_task_from_tree	24	static
+lcd_menu.c:332:20:get_new_task	24	static
+lcd_menu.c:375:20:get_child	24	static
+lcd_menu.c:388:20:get_parent	24	static
+lcd_menu.c:402:6:lcd_menu_update	16	static
+lcd_menu.c:442:6:lcd_menu_draw	8	static
+lcd_menu.c:450:6:lcd_menu_stop	8	static

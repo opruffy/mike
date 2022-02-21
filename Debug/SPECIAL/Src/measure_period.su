@@ -1,0 +1,13 @@
+measure_period.c:56:10:measure_period_get_current_value	4	static
+measure_period.c:61:6:measure_period_set_mode	16	static
+measure_period.c:67:9:measure_period_get_current_mode	4	static
+measure_period.c:72:9:measure_period_get_previous_mode	16	static
+measure_period.c:83:9:measure_period_get_next_mode	16	static
+measure_period.c:94:8:measure_period_get_text	16	static
+measure_period.c:101:6:measure_period_set_status_waiting	4	static
+measure_period.c:106:9:measure_period_get_status_ready	4	static
+measure_period.c:116:6:measure_period_set_status_started	4	static
+measure_period.c:121:9:measure_period_get_status_started	4	static
+measure_period.c:131:6:measure_period_set_status_finished	4	static
+measure_period.c:136:6:measure_period_reset_status	4	static
+measure_period.c:156:9:measure_period_update_status	8	static

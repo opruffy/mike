@@ -1,0 +1,11 @@
+lcd_function.c:13:13:set_data_16bit	16	static
+lcd_function.c:21:13:set_data_8bit	16	static
+lcd_function.c:28:13:set_address_pointer	16	static
+lcd_function.c:33:13:write_data	16	static
+lcd_function.c:39:13:clear_text	16	static
+lcd_function.c:50:13:clear_cg	16	static
+lcd_function.c:61:13:clear_graphic	24	static
+lcd_function.c:71:13:clear_display	16	static
+lcd_function.c:79:9:lcd_initialize	8	static,ignoring_inline_asm
+lcd_function.c:116:9:lcd_set_pixel	24	static
+lcd_function.c:130:9:lcd_clear_pixel	24	static

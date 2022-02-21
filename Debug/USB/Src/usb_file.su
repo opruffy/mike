@@ -1,0 +1,8 @@
+usb_file.c:29:9:usb_mount	16	static
+usb_file.c:39:9:usb_unmount	8	static
+usb_file.c:47:9:usb_file_exists_get	4	static
+usb_file.c:52:6:usb_file_exists_reset	4	static
+usb_file.c:57:7:usb_file_get_filename	4	static
+usb_file.c:62:16:usb_file_get_name	264	static
+usb_file.c:90:9:usb_file_create	216	static
+usb_file.c:117:9:usb_file_write_data	2024	static

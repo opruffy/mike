@@ -1,0 +1,5 @@
+lcd.c:21:13:lcd_status_draw	8	static
+lcd.c:48:13:lcd_status_update	8	static
+lcd.c:82:9:lcd_draw	8	static
+lcd.c:92:9:lcd_update	8	static
+lcd.c:100:6:lcd_stop	8	static

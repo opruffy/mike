@@ -1,0 +1,2 @@
+calc.c:11:7:calc_temp	24	static
+calc.c:17:7:calc_room_temp	24	static

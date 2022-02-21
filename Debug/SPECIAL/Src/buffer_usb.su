@@ -1,0 +1,6 @@
+buffer_usb.c:26:16:buffer_usb_lock	16	static
+buffer_usb.c:37:16:buffer_usb_unlock	4	static
+buffer_usb.c:43:8:buffer_usb_get_count	16	static
+buffer_usb.c:56:9:buffer_usb_set_value	24	static
+buffer_usb.c:88:8:buffer_usb_get_values	24	static
+buffer_usb.c:133:6:buffer_usb_reset_counter	4	static

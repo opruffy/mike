@@ -1,0 +1,2 @@
+lcd_body_value.c:48:9:lcd_body_value_draw	32	static
+lcd_body_value.c:121:9:lcd_body_value_update	8	static
