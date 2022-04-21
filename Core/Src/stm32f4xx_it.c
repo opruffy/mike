@@ -241,7 +241,7 @@ void EXTI15_10_IRQHandler(void)
   HAL_GPIO_EXTI_IRQHandler(PUSH_Pin);
   HAL_GPIO_EXTI_IRQHandler(UP_Pin);
   HAL_GPIO_EXTI_IRQHandler(DOWN_Pin);
-  HAL_GPIO_EXTI_IRQHandler(PC14_OSC32_IN_Pin);
+  HAL_GPIO_EXTI_IRQHandler(RIGHT_Pin);
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */
 
   /* USER CODE END EXTI15_10_IRQn 1 */
@@ -292,4 +292,3 @@ void OTG_FS_IRQHandler(void)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
-
