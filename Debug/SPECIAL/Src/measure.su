@@ -1,9 +1,0 @@
-measure.c:23:6:measure_mode_status_set_changed	4	static
-measure.c:28:9:measure_mode_status_get_changed	4	static
-measure.c:38:6:measure_mode_status_update	4	static
-measure.c:48:6:measure_set_mode_start	4	static
-measure.c:57:9:measure_get_mode_start	4	static
-measure.c:67:6:measure_set_mode_pause	4	static
-measure.c:76:9:measure_get_mode_pause	4	static
-measure.c:86:6:measure_set_mode_stop	4	static
-measure.c:92:9:measure_get_mode_stop	4	static

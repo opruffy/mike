@@ -1,7 +1,0 @@
-button.c:27:6:HAL_GPIO_EXTI_Callback	16	static
-button.c:67:9:button_get_pressed_any	4	static
-button.c:72:9:button_get_pressed_up	4	static
-button.c:83:9:button_get_pressed_down	4	static
-button.c:94:9:button_get_pressed_left	4	static
-button.c:105:9:button_get_pressed_right	4	static
-button.c:116:9:button_get_pressed_ok	4	static

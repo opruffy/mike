@@ -1,2 +1,0 @@
-lcd_body.c:12:9:lcd_body_reset	8	static
-lcd_body.c:19:9:lcd_body_sub_reset	8	static

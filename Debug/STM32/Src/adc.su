@@ -1,6 +1,0 @@
-adc.c:61:6:adc_dma_start	8	static
-adc.c:79:6:adc_dma_stop	8	static
-adc.c:92:13:sort_bubble	40	static
-adc.c:111:6:adc_transfer_data_to_buffer	16	static
-adc.c:143:6:HAL_ADC_ConvCpltCallback	16	static
-adc.c:165:6:adc_stop	8	static

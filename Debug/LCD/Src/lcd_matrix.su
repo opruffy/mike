@@ -1,4 +1,0 @@
-lcd_matrix.c:17:9:lcd_matrix_set_pixel	24	static
-lcd_matrix.c:27:9:lcd_matrix_clear_pixel	24	static
-lcd_matrix.c:37:9:lcd_matrix_update	48	static
-lcd_matrix.c:68:9:lcd_matrix_reset	40	static

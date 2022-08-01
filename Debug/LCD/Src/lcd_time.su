@@ -1,3 +1,0 @@
-lcd_time.c:15:13:lcd_time_draw_time	40	static
-lcd_time.c:37:6:lcd_time_draw	24	static
-lcd_time.c:44:6:lcd_time_update	24	static

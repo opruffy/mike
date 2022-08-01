@@ -1,5 +1,0 @@
-lcd_display_view.c:20:9:lcd_display_view_set_flip	4	static
-lcd_display_view.c:27:9:lcd_display_view_reset_flip	4	static
-lcd_display_view.c:34:9:lcd_display_view_is_original	16	static
-lcd_display_view.c:46:10:lcd_display_view_get_x	16	static
-lcd_display_view.c:56:10:lcd_display_view_get_y	16	static

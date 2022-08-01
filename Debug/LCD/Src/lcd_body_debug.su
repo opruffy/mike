@@ -1,2 +1,0 @@
-lcd_body_debug.c:21:9:lcd_body_debug_draw	40	static
-lcd_body_debug.c:120:9:lcd_body_debug_update	8	static

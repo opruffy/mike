@@ -1,7 +1,0 @@
-buffer_lcd.c:27:16:buffer_lcd_lock	16	static
-buffer_lcd.c:38:16:buffer_lcd_unlock	4	static
-buffer_lcd.c:44:8:buffer_lcd_get_count	16	static
-buffer_lcd.c:57:9:buffer_lcd_set_value	24	static
-buffer_lcd.c:94:9:buffer_lcd_get_values	24	static
-buffer_lcd.c:126:9:buffer_lcd_get_last_values	24	static
-buffer_lcd.c:150:6:buffer_lcd_stop	8	static

@@ -1,2 +1,0 @@
-tim.c:24:6:HAL_TIM_PeriodElapsedCallback	16	static
-tim.c:51:6:tim_start_irq	8	static
