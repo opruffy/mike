@@ -133,9 +133,18 @@ int main(void)
  	adc_transfer_data_to_buffer();
  	usb_statemachine();
 
- 	// Stop
- 	if(!measure_get_mode_stop())
+ 	// Pause
+ 	if(!measure_get_mode_pause())
  	{
+ 		// TODO testen
+		HAL_TIM_Base_Stop_IT(&htim6);
+ 		measure_period_reset_status();
+ 	}
+ 	// Stop
+ 	else if(!measure_get_mode_stop())
+ 	{
+ 		// TODO testen
+		HAL_TIM_Base_Stop_IT(&htim6);
  		adc_stop();
  		usb_stop();
  		lcd_stop();
