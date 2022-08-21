@@ -127,14 +127,14 @@ uint8_t lcd_data_write(uint8_t data)
 
 	__disable_irq();
 
-	HAL_GPIO_WritePin(DB0_GPIO_Port, GLCD_DB0_Pin, data & (1 << 0));
-	HAL_GPIO_WritePin(DB1_GPIO_Port, GLCD_DB1_Pin, data & (1 << 1));
-	HAL_GPIO_WritePin(DB2_GPIO_Port, GLCD_DB2_Pin, data & (1 << 2));
-	HAL_GPIO_WritePin(DB3_GPIO_Port, GLCD_DB3_Pin, data & (1 << 3));
-	HAL_GPIO_WritePin(DB4_GPIO_Port, GLCD_DB4_Pin, data & (1 << 4));
-	HAL_GPIO_WritePin(DB5_GPIO_Port, GLCD_DB5_Pin, data & (1 << 5));
-	HAL_GPIO_WritePin(DB6_GPIO_Port, GLCD_DB6_Pin, data & (1 << 6));
-	HAL_GPIO_WritePin(DB7_GPIO_Port, GLCD_DB7_Pin, data & (1 << 7));
+	HAL_GPIO_WritePin(GLCD_DB0_GPIO_Port, GLCD_DB0_Pin, data & (1 << 0));
+	HAL_GPIO_WritePin(GLCD_DB1_GPIO_Port, GLCD_DB1_Pin, data & (1 << 1));
+	HAL_GPIO_WritePin(GLCD_DB2_GPIO_Port, GLCD_DB2_Pin, data & (1 << 2));
+	HAL_GPIO_WritePin(GLCD_DB3_GPIO_Port, GLCD_DB3_Pin, data & (1 << 3));
+	HAL_GPIO_WritePin(GLCD_DB4_GPIO_Port, GLCD_DB4_Pin, data & (1 << 4));
+	HAL_GPIO_WritePin(GLCD_DB5_GPIO_Port, GLCD_DB5_Pin, data & (1 << 5));
+	HAL_GPIO_WritePin(GLCD_DB6_GPIO_Port, GLCD_DB6_Pin, data & (1 << 6));
+	HAL_GPIO_WritePin(GLCD_DB7_GPIO_Port, GLCD_DB7_Pin, data & (1 << 7));
 
 	HAL_GPIO_WritePin(GLCD_CD_GPIO_Port, GLCD_CD_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(GLCD_WR_GPIO_Port, GLCD_WR_Pin, GPIO_PIN_RESET);
@@ -153,14 +153,14 @@ uint8_t lcd_data_write(uint8_t data)
 
 	HAL_GPIO_WritePin(GLCD_CD_GPIO_Port, GLCD_CD_Pin, GPIO_PIN_SET);
 
-	HAL_GPIO_WritePin(DB0_GPIO_Port, GLCD_DB0_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB1_GPIO_Port, GLCD_DB1_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB2_GPIO_Port, GLCD_DB2_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB3_GPIO_Port, GLCD_DB3_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB4_GPIO_Port, GLCD_DB4_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB5_GPIO_Port, GLCD_DB5_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB6_GPIO_Port, GLCD_DB6_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB7_GPIO_Port, GLCD_DB7_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB0_GPIO_Port, GLCD_DB0_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB1_GPIO_Port, GLCD_DB1_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB2_GPIO_Port, GLCD_DB2_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB3_GPIO_Port, GLCD_DB3_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB4_GPIO_Port, GLCD_DB4_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB5_GPIO_Port, GLCD_DB5_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB6_GPIO_Port, GLCD_DB6_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB7_GPIO_Port, GLCD_DB7_Pin, GPIO_PIN_RESET);
 
 	__enable_irq();
 
@@ -176,14 +176,14 @@ uint8_t lcd_cmd_write(uint8_t data)
 
 	__disable_irq();
 
-	HAL_GPIO_WritePin(DB0_GPIO_Port, GLCD_DB0_Pin, data & (1 << 0));
-	HAL_GPIO_WritePin(DB1_GPIO_Port, GLCD_DB1_Pin, data & (1 << 1));
-	HAL_GPIO_WritePin(DB2_GPIO_Port, GLCD_DB2_Pin, data & (1 << 2));
-	HAL_GPIO_WritePin(DB3_GPIO_Port, GLCD_DB3_Pin, data & (1 << 3));
-	HAL_GPIO_WritePin(DB4_GPIO_Port, GLCD_DB4_Pin, data & (1 << 4));
-	HAL_GPIO_WritePin(DB5_GPIO_Port, GLCD_DB5_Pin, data & (1 << 5));
-	HAL_GPIO_WritePin(DB6_GPIO_Port, GLCD_DB6_Pin, data & (1 << 6));
-	HAL_GPIO_WritePin(DB7_GPIO_Port, GLCD_DB7_Pin, data & (1 << 7));
+	HAL_GPIO_WritePin(GLCD_DB0_GPIO_Port, GLCD_DB0_Pin, data & (1 << 0));
+	HAL_GPIO_WritePin(GLCD_DB1_GPIO_Port, GLCD_DB1_Pin, data & (1 << 1));
+	HAL_GPIO_WritePin(GLCD_DB2_GPIO_Port, GLCD_DB2_Pin, data & (1 << 2));
+	HAL_GPIO_WritePin(GLCD_DB3_GPIO_Port, GLCD_DB3_Pin, data & (1 << 3));
+	HAL_GPIO_WritePin(GLCD_DB4_GPIO_Port, GLCD_DB4_Pin, data & (1 << 4));
+	HAL_GPIO_WritePin(GLCD_DB5_GPIO_Port, GLCD_DB5_Pin, data & (1 << 5));
+	HAL_GPIO_WritePin(GLCD_DB6_GPIO_Port, GLCD_DB6_Pin, data & (1 << 6));
+	HAL_GPIO_WritePin(GLCD_DB7_GPIO_Port, GLCD_DB7_Pin, data & (1 << 7));
 
 	HAL_GPIO_WritePin(GLCD_CD_GPIO_Port, GLCD_CD_Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(GLCD_WR_GPIO_Port, GLCD_WR_Pin, GPIO_PIN_RESET);
@@ -202,14 +202,14 @@ uint8_t lcd_cmd_write(uint8_t data)
 
 	HAL_GPIO_WritePin(GLCD_CD_GPIO_Port, GLCD_CD_Pin, GPIO_PIN_SET);
 
-	HAL_GPIO_WritePin(DB0_GPIO_Port, GLCD_DB0_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB1_GPIO_Port, GLCD_DB1_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB2_GPIO_Port, GLCD_DB2_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB3_GPIO_Port, GLCD_DB3_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB4_GPIO_Port, GLCD_DB4_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB5_GPIO_Port, GLCD_DB5_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB6_GPIO_Port, GLCD_DB6_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(DB7_GPIO_Port, GLCD_DB7_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB0_GPIO_Port, GLCD_DB0_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB1_GPIO_Port, GLCD_DB1_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB2_GPIO_Port, GLCD_DB2_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB3_GPIO_Port, GLCD_DB3_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB4_GPIO_Port, GLCD_DB4_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB5_GPIO_Port, GLCD_DB5_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB6_GPIO_Port, GLCD_DB6_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GLCD_DB7_GPIO_Port, GLCD_DB7_Pin, GPIO_PIN_RESET);
 
 	__enable_irq();
 
