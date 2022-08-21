@@ -18,8 +18,6 @@ extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim6;
 
-uint8_t tim_status = 0;
-
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -34,7 +32,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 	else if(htim == &htim6)
 	{
-		if(!measure_get_mode_start())
+		if(!measure_get_mode_running())
 		{
 			clock_inc();
 			measure_period_update_status();
@@ -50,11 +48,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 void tim_start_irq(void)
 {
-	if(!measure_get_mode_start() && !tim_status)
+	if(!measure_get_mode_start())
 	{
 		HAL_TIM_Base_Start_IT(&htim6);
 		adc_dma_start();
 		measure_period_set_status_started();
-		tim_status = 1;
+		measure_set_mode_running();
 	}
 }

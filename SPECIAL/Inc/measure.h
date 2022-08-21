@@ -19,6 +19,9 @@ void measure_mode_status_update(void);
 void measure_set_mode_start(void);
 uint8_t measure_get_mode_start(void);
 
+void measure_set_mode_running(void);
+uint8_t measure_get_mode_running(void);
+
 void measure_set_mode_pause(void);
 uint8_t measure_get_mode_pause(void);
 

@@ -26,7 +26,7 @@ void usb_statemachine(void)
 			break;
 
 		case APPLICATION_READY:
-			if(!usb_mount() && !measure_get_mode_start())
+			if(!usb_mount() && !measure_get_mode_running())
 			{
 				// create file
 				if(usb_file_exists_get())
@@ -54,7 +54,7 @@ uint8_t usb_ready(void)
 
 void usb_update(void)
 {
-	if(!usb_file_ready && !measure_get_mode_start() && buffer_usb_get_count())
+	if(!usb_file_ready && !measure_get_mode_running() && buffer_usb_get_count())
 	{
 		usb_file_write_data();
 	}

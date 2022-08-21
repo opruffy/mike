@@ -105,7 +105,7 @@ uint8_t lcd_body_settings_start_trigger_ok(void)
 
 static uint8_t settings_start_button_draw(void)
 {
-	if(!measure_get_mode_start())
+	if(!measure_get_mode_running())
 	{
 		lcd_symbol_rect_filled(SETT_START_LEFT_START_X, SETT_START_LEFT_START_Y, SETT_START_LEFT_LENGTH_X, SETT_START_LEFT_LENGTH_Y);
 		lcd_symbol_rect(SETT_START_RIGHT_START_X, SETT_START_RIGHT_START_Y, SETT_START_RIGHT_LENGTH_X, SETT_START_RIGHT_LENGTH_Y);

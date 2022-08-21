@@ -9,7 +9,8 @@
 
 #define MEASURE_MODE_STOP			(0)
 #define MEASURE_MODE_START			(1)
-#define MEASURE_MODE_PAUSE			(2)
+#define MEASURE_MODE_RUNNING		(2)
+#define MEASURE_MODE_PAUSE			(3)
 
 #define MEASURE_MODE_STATUS_NONE	(0)
 #define MEASURE_MODE_STATUS_CHANGED	(1)
@@ -64,9 +65,28 @@ uint8_t measure_get_mode_start(void)
 	return 1;
 }
 
-void measure_set_mode_pause(void)
+void measure_set_mode_running(void)
 {
 	if(measure_mode == MEASURE_MODE_START)
+	{
+		measure_mode = MEASURE_MODE_RUNNING;
+		measure_mode_status = MEASURE_MODE_STATUS_CHANGED;
+	}
+}
+
+uint8_t measure_get_mode_running(void)
+{
+	if(measure_mode == MEASURE_MODE_RUNNING)
+	{
+		return 0;
+	}
+
+	return 1;
+}
+
+void measure_set_mode_pause(void)
+{
+	if((measure_mode == MEASURE_MODE_START) || (measure_mode == MEASURE_MODE_RUNNING))
 	{
 		measure_mode = MEASURE_MODE_PAUSE;
 		measure_mode_status = MEASURE_MODE_STATUS_CHANGED;

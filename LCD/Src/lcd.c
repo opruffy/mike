@@ -29,7 +29,7 @@ static void lcd_status_draw(void)
 		lcd_symbol_symb_clear(HEAD_USB_X, HEAD_USB_Y);
 	}
 
-	if(!measure_get_mode_start())
+	if(!measure_get_mode_running())
 	{
 		lcd_symbol_symb(HEAD_MEASURE_MODE_X, HEAD_MEASURE_MODE_Y, SYM_PLAY);
 	}
@@ -58,7 +58,7 @@ static void lcd_status_update(void)
 
 	if(!measure_mode_status_get_changed())
 	{
-		if(!measure_get_mode_start())
+		if(!measure_get_mode_running())
 		{
 			lcd_symbol_symb(HEAD_MEASURE_MODE_X, HEAD_MEASURE_MODE_Y, SYM_PLAY);
 		}
