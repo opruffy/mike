@@ -136,11 +136,13 @@
 // MENU INDEX
 typedef enum
 {
+	// main menu
 	menu_value = 0,
 	menu_graph,
 	menu_sett,
 	menu_debug,
 
+	// sub menus
 	menu_value_body,
 
 	menu_graph_body,
@@ -153,7 +155,8 @@ typedef enum
 
 	menu_debug_body,
 
-	menu_none,
+	// other tasks
+	menu_change_main_menu,
 	menu_noaction,
 
 }menu_task_t;

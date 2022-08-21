@@ -66,7 +66,7 @@ const menu_t menu_tree[] =
 				menu_noaction,			// OK
 			},
 			.child = menu_value_body,
-			.parent = menu_none,
+			.parent = menu_noaction,
 		},
 		// graph
 		{
@@ -82,7 +82,7 @@ const menu_t menu_tree[] =
 				menu_noaction,
 			},
 			.child = menu_graph_body,
-			.parent = menu_none,
+			.parent = menu_noaction,
 		},
 		// settings
 		{
@@ -98,7 +98,7 @@ const menu_t menu_tree[] =
 				menu_noaction,
 			},
 			.child = menu_sett_start,
-			.parent = menu_none,
+			.parent = menu_noaction,
 		},
 		// debug
 		{
@@ -114,7 +114,7 @@ const menu_t menu_tree[] =
 				menu_noaction,
 			},
 			.child = menu_debug_body,
-			.parent = menu_none,
+			.parent = menu_noaction,
 		},
 
 		// value - body
@@ -126,11 +126,11 @@ const menu_t menu_tree[] =
 			{
 				menu_noaction,
 				menu_noaction,
-				menu_none,
-				menu_none,
+				menu_change_main_menu,
+				menu_change_main_menu,
 				menu_noaction,
 			},
-			.child = menu_none,
+			.child = menu_noaction,
 			.parent = menu_value,
 		},
 
@@ -151,11 +151,11 @@ const menu_t menu_tree[] =
 			{
 				menu_graph_body,
 				menu_graph_body,
-				menu_none,
-				menu_none,
+				menu_change_main_menu,
+				menu_change_main_menu,
 				menu_noaction,
 			},
-			.child = menu_none,
+			.child = menu_noaction,
 			.parent = menu_graph,
 		},
 
@@ -176,11 +176,11 @@ const menu_t menu_tree[] =
 			{
 				menu_sett_flip,
 				menu_sett_pause,
-				menu_none,
-				menu_none,
+				menu_change_main_menu,
+				menu_change_main_menu,
 				menu_sett_start,
 			},
-			.child = menu_none,
+			.child = menu_noaction,
 			.parent = menu_sett,
 		},
 		// settings - pause
@@ -200,11 +200,11 @@ const menu_t menu_tree[] =
 			{
 				menu_sett_start,
 				menu_sett_stop,
-				menu_none,
-				menu_none,
+				menu_change_main_menu,
+				menu_change_main_menu,
 				menu_sett_pause,
 			},
-			.child = menu_none,
+			.child = menu_noaction,
 			.parent = menu_sett,
 		},
 		// settings - stop
@@ -224,11 +224,11 @@ const menu_t menu_tree[] =
 			{
 				menu_sett_pause,
 				menu_sett_period,
-				menu_none,
-				menu_none,
+				menu_change_main_menu,
+				menu_change_main_menu,
 				menu_sett_stop,
 			},
-			.child = menu_none,
+			.child = menu_noaction,
 			.parent = menu_sett,
 		},
 		// settings - period
@@ -253,7 +253,7 @@ const menu_t menu_tree[] =
 				menu_sett_period,
 				menu_sett_period,
 			},
-			.child = menu_none,
+			.child = menu_noaction,
 			.parent = menu_sett,
 		},
 		// settings - flip
@@ -273,11 +273,11 @@ const menu_t menu_tree[] =
 			{
 				menu_sett_period,
 				menu_sett_start,
-				menu_none,
-				menu_none,
+				menu_change_main_menu,
+				menu_change_main_menu,
 				menu_sett_flip,
 			},
-			.child = menu_none,
+			.child = menu_noaction,
 			.parent = menu_sett,
 		},
 
@@ -290,11 +290,11 @@ const menu_t menu_tree[] =
 			{
 				menu_noaction,
 				menu_noaction,
-				menu_none,
-				menu_none,
+				menu_change_main_menu,
+				menu_change_main_menu,
 				menu_noaction,
 			},
-			.child = menu_none,
+			.child = menu_noaction,
 			.parent = menu_debug,
 		},
 };
@@ -307,7 +307,7 @@ static menu_task_t get_task_from_tree(menu_task_t task, action_t action)
 
 	if(menu_tree[task].task[action] != menu_noaction)
 	{
-		if(menu_tree[task].task[action] != menu_none)
+		if(menu_tree[task].task[action] != menu_change_main_menu)
 		{
 			if(menu_tree[task].trigger[action] != NULL)
 			{
@@ -319,7 +319,7 @@ static menu_task_t get_task_from_tree(menu_task_t task, action_t action)
 		}
 		else
 		{
-			if(menu_tree[task].parent != menu_none)
+			if(menu_tree[task].parent != menu_noaction)
 			{
 				new_task = get_task_from_tree(menu_tree[task].parent, action);
 			}
@@ -372,27 +372,27 @@ static menu_task_t get_new_task(menu_task_t task)
 	return new_task;
 }
 
-static menu_task_t get_child(menu_task_t task)
+static menu_task_t get_child_task(menu_task_t task)
 {
 	menu_task_t new_task = task;
 
-	if(menu_tree[task].child != menu_none)
+	if(menu_tree[task].child != menu_noaction)
 	{
 		menu_tree[menu_tree[task].child].draw();
-		new_task = get_child(menu_tree[task].child);
+		new_task = get_child_task(menu_tree[task].child);
 	}
 
 	return new_task;
 }
 
-static menu_task_t get_parent(menu_task_t task)
+static menu_task_t get_parent_task(menu_task_t task)
 {
 	menu_task_t new_task = task;
 
-	if(menu_tree[task].parent != menu_none)
+	if(menu_tree[task].parent != menu_noaction)
 	{
 		menu_tree[menu_tree[task].parent].reset_matrix();
-		new_task = get_parent(menu_tree[task].parent);
+		new_task = get_parent_task(menu_tree[task].parent);
 		menu_tree[menu_tree[task].parent].draw();
 	}
 
@@ -403,12 +403,12 @@ void lcd_menu_update(void)
 {
 	menu_task_t task = get_new_task(menu_active);
 
-	if(task != menu_none)
+	if(task != menu_noaction)
 	{
 		if(triggered == 1)
 		{
 			menu_tree[task].reset_matrix();
-			get_parent(task);
+			get_parent_task(task);
 
 			if(menu_tree[task].trigger_draw != NULL)	// TODO is there a better solution?
 				menu_tree[task].trigger_draw();
@@ -426,7 +426,7 @@ void lcd_menu_update(void)
 		{
 			menu_tree[task].reset_matrix();
 			menu_tree[task].draw();
-			menu_active = get_child(task);
+			menu_active = get_child_task(task);
 
 			lcd_matrix_update(0, 0, 240, 128);
 		}
@@ -442,7 +442,7 @@ void lcd_menu_update(void)
 void lcd_menu_draw(void)
 {
 	menu_tree[menu_active].draw();
-	menu_active = get_child(menu_active);
+	menu_active = get_child_task(menu_active);
 
 	lcd_matrix_update(0, 0, 240, 128);
 }
