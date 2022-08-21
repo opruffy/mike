@@ -29,6 +29,7 @@
 
 buffer_info_t lcd_graph_buffer[LCD_GRAPH_BUFFER_SIZE] = { 0 };
 uint8_t lcd_graph_index = 0;
+uint8_t lcd_graph_index_changed = 0;
 size_t data_length = 0;
 
 // indices which are shown
@@ -395,6 +396,15 @@ uint8_t lcd_body_graph_update(void)
 
 		lcd_body_graph_reset();
 		lcd_body_graph_diagram_draw(lcd_graph_index);
+
+		lcd_graph_index_changed = 0;
+	}
+	else if(lcd_graph_index_changed)
+	{
+		lcd_body_graph_reset();
+		lcd_body_graph_diagram_draw(lcd_graph_index);
+
+		lcd_graph_index_changed = 0;
 	}
 
 	return 0;
@@ -409,6 +419,7 @@ uint8_t lcd_body_graph_trigger_up(void)
 
 	lcd_graph_index--;
 
+	lcd_graph_index_changed = 1;
 	return 0;
 }
 
@@ -420,6 +431,7 @@ uint8_t lcd_body_graph_trigger_down(void)
 		lcd_graph_index = 0;
 	}
 
+	lcd_graph_index_changed = 1;
 	return 0;
 }
 

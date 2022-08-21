@@ -24,7 +24,6 @@
 typedef uint8_t (*draw_fp)(void);
 typedef uint8_t (*reset_fp)(void);
 typedef uint8_t (*trigger_fp)(void);
-typedef uint8_t (*trigger_draw_fp)(void);
 typedef uint8_t (*update_fp)(void);
 
 typedef enum
@@ -41,7 +40,6 @@ typedef struct
 	draw_fp draw;
 	reset_fp reset_matrix;
 	trigger_fp trigger[5];
-	trigger_draw_fp trigger_draw;
 	update_fp update;
 	menu_task_t task[5];
 	menu_task_t parent;
@@ -243,7 +241,6 @@ const menu_t menu_tree[] =
 				&lcd_body_settings_period_trigger_right,	// right
 				&lcd_body_settings_period_trigger_ok,		// OK
 			},
-			.trigger_draw = &lcd_body_settings_period_trigger_draw,
 			.update = &lcd_body_settings_period_update,
 			.task =
 			{
@@ -299,8 +296,6 @@ const menu_t menu_tree[] =
 		},
 };
 
-uint8_t triggered = 0;
-
 static menu_task_t get_task_from_tree(menu_task_t task, action_t action)
 {
 	menu_task_t new_task = task;
@@ -312,7 +307,6 @@ static menu_task_t get_task_from_tree(menu_task_t task, action_t action)
 			if(menu_tree[task].trigger[action] != NULL)
 			{
 				menu_tree[task].trigger[action]();
-				triggered = 1;
 			}
 
 			new_task = menu_tree[task].task[action];
@@ -405,24 +399,7 @@ void lcd_menu_update(void)
 
 	if(task != menu_noaction)
 	{
-		if(triggered == 1)
-		{
-			menu_tree[task].reset_matrix();
-			get_parent_task(task);
-
-			if(menu_tree[task].trigger_draw != NULL)	// TODO is there a better solution?
-				menu_tree[task].trigger_draw();
-			else
-				menu_tree[task].draw();
-
-			measure_mode_status_set_changed();
-			clock_set_status();
-
-			lcd_matrix_update(0, 0, 240, 128);
-
-			triggered = 0;
-		}
-		else if(menu_active != task)
+		if(menu_active != task)
 		{
 			menu_tree[task].reset_matrix();
 			menu_tree[task].draw();

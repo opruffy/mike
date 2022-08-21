@@ -132,7 +132,9 @@ uint8_t lcd_body_settings_start_draw(void)
 
 uint8_t lcd_body_settings_start_update(void)
 {
-	return settings_start_button_draw();
+	settings_start_button_draw();
+
+	return 0;
 }
 
 // SETTINGS PAUSE
@@ -170,7 +172,9 @@ uint8_t lcd_body_settings_pause_draw(void)
 
 uint8_t lcd_body_settings_pause_update(void)
 {
-	return settings_pause_button_draw();
+	settings_pause_button_draw();
+
+	return 0;
 }
 
 // SETTINGS STOP
@@ -208,7 +212,9 @@ uint8_t lcd_body_settings_stop_draw(void)
 
 uint8_t lcd_body_settings_stop_update(void)
 {
-	return settings_stop_button_draw();
+	settings_stop_button_draw();
+
+	return 0;
 }
 
 static uint8_t settings_period_button(uint8_t _index)
@@ -267,19 +273,9 @@ uint8_t lcd_body_settings_period_draw(void)
 	return 0;
 }
 
-uint8_t lcd_body_settings_period_trigger_draw(void)
-{
-	settings_draw_basic();
-	settings_period_draw_inv();
-
-	settings_period_button(lcd_period_mode_index);
-
-	return 0;
-}
-
 uint8_t lcd_body_settings_period_update(void)
 {
-	//settings_period_button(lcd_body_show_index);
+	settings_period_button(lcd_period_mode_index);
 
 	return 0;
 }
