@@ -524,8 +524,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, GLCD_CD_Pin|GLCD_CE_Pin|GLCD_WR_Pin|GLCD_DB0_Pin
-                          |GLCD_DB1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, GLCD_CD_Pin|GLCD_CE_Pin|GLCD_WR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GLCD_RD_GPIO_Port, GLCD_RD_Pin, GPIO_PIN_SET);
@@ -535,33 +534,30 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, GREEN_LED_Pin|ORANGE_LED_Pin|RED_LED_Pin|BLUE_LED_Pin
-                          |GLCD_FONT_Pin, GPIO_PIN_RESET);
+                          |GLCD_DB3_Pin|GLCD_DB0_Pin|GLCD_DB1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GLCD_DB6_Pin|GLCD_DB7_Pin|GLCD_DB4_Pin|GLCD_DB5_Pin
-                          |GLCD_DB2_Pin|GLCD_DB3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, GLCD_FONT_Pin|GLCD_DB6_Pin|GLCD_DB7_Pin|GLCD_DB4_Pin
+                          |GLCD_DB5_Pin|GLCD_DB2_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : GLCD_CD_Pin GLCD_RD_Pin GLCD_CE_Pin GLCD_WR_Pin
-                           GLCD_DB0_Pin GLCD_DB1_Pin */
-  GPIO_InitStruct.Pin = GLCD_CD_Pin|GLCD_RD_Pin|GLCD_CE_Pin|GLCD_WR_Pin
-                          |GLCD_DB0_Pin|GLCD_DB1_Pin;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GLCD_RESET_GPIO_Port, GLCD_RESET_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : GLCD_CD_Pin GLCD_RD_Pin GLCD_CE_Pin GLCD_WR_Pin */
+  GPIO_InitStruct.Pin = GLCD_CD_Pin|GLCD_RD_Pin|GLCD_CE_Pin|GLCD_WR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : GLCD_RESET_Pin */
-  GPIO_InitStruct.Pin = GLCD_RESET_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GLCD_RESET_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : OTG_FS_PowerSwitchOn_Pin */
-  GPIO_InitStruct.Pin = OTG_FS_PowerSwitchOn_Pin;
+  /*Configure GPIO pins : OTG_FS_PowerSwitchOn_Pin GLCD_FONT_Pin GLCD_DB6_Pin GLCD_DB7_Pin
+                           GLCD_DB4_Pin GLCD_DB5_Pin GLCD_DB2_Pin */
+  GPIO_InitStruct.Pin = OTG_FS_PowerSwitchOn_Pin|GLCD_FONT_Pin|GLCD_DB6_Pin|GLCD_DB7_Pin
+                          |GLCD_DB4_Pin|GLCD_DB5_Pin|GLCD_DB2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(OTG_FS_PowerSwitchOn_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -584,9 +580,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : GREEN_LED_Pin ORANGE_LED_Pin RED_LED_Pin BLUE_LED_Pin
-                           GLCD_FONT_Pin */
+                           GLCD_DB3_Pin GLCD_DB0_Pin GLCD_DB1_Pin */
   GPIO_InitStruct.Pin = GREEN_LED_Pin|ORANGE_LED_Pin|RED_LED_Pin|BLUE_LED_Pin
-                          |GLCD_FONT_Pin;
+                          |GLCD_DB3_Pin|GLCD_DB0_Pin|GLCD_DB1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -598,14 +594,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(OTG_FS_OverCurrent_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : GLCD_DB6_Pin GLCD_DB7_Pin GLCD_DB4_Pin GLCD_DB5_Pin
-                           GLCD_DB2_Pin GLCD_DB3_Pin */
-  GPIO_InitStruct.Pin = GLCD_DB6_Pin|GLCD_DB7_Pin|GLCD_DB4_Pin|GLCD_DB5_Pin
-                          |GLCD_DB2_Pin|GLCD_DB3_Pin;
+  /*Configure GPIO pin : GLCD_RESET_Pin */
+  GPIO_InitStruct.Pin = GLCD_RESET_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(GLCD_RESET_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 3, 0);

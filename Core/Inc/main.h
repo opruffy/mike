@@ -60,8 +60,6 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define GLCD_CD_Pin GPIO_PIN_2
 #define GLCD_CD_GPIO_Port GPIOE
-#define GLCD_RESET_Pin GPIO_PIN_3
-#define GLCD_RESET_GPIO_Port GPIOE
 #define GLCD_RD_Pin GPIO_PIN_4
 #define GLCD_RD_GPIO_Port GPIOE
 #define GLCD_CE_Pin GPIO_PIN_5
@@ -105,6 +103,12 @@ void Error_Handler(void);
 #define RED_LED_GPIO_Port GPIOD
 #define BLUE_LED_Pin GPIO_PIN_15
 #define BLUE_LED_GPIO_Port GPIOD
+#define GLCD_FONT_Pin GPIO_PIN_7
+#define GLCD_FONT_GPIO_Port GPIOC
+#define GLCD_DB6_Pin GPIO_PIN_8
+#define GLCD_DB6_GPIO_Port GPIOC
+#define GLCD_DB7_Pin GPIO_PIN_9
+#define GLCD_DB7_GPIO_Port GPIOC
 #define VBUS_FS_Pin GPIO_PIN_9
 #define VBUS_FS_GPIO_Port GPIOA
 #define OTG_FS_ID_Pin GPIO_PIN_10
@@ -117,28 +121,24 @@ void Error_Handler(void);
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin GPIO_PIN_14
 #define SWCLK_GPIO_Port GPIOA
+#define GLCD_DB4_Pin GPIO_PIN_10
+#define GLCD_DB4_GPIO_Port GPIOC
+#define GLCD_DB5_Pin GPIO_PIN_11
+#define GLCD_DB5_GPIO_Port GPIOC
+#define GLCD_DB2_Pin GPIO_PIN_12
+#define GLCD_DB2_GPIO_Port GPIOC
+#define GLCD_DB3_Pin GPIO_PIN_0
+#define GLCD_DB3_GPIO_Port GPIOD
+#define GLCD_DB0_Pin GPIO_PIN_1
+#define GLCD_DB0_GPIO_Port GPIOD
+#define GLCD_DB1_Pin GPIO_PIN_2
+#define GLCD_DB1_GPIO_Port GPIOD
 #define OTG_FS_OverCurrent_Pin GPIO_PIN_5
 #define OTG_FS_OverCurrent_GPIO_Port GPIOD
-#define GLCD_FONT_Pin GPIO_PIN_6
-#define GLCD_FONT_GPIO_Port GPIOD
 #define SWO_Pin GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
-#define GLCD_DB6_Pin GPIO_PIN_4
-#define GLCD_DB6_GPIO_Port GPIOB
-#define GLCD_DB7_Pin GPIO_PIN_5
-#define GLCD_DB7_GPIO_Port GPIOB
-#define GLCD_DB4_Pin GPIO_PIN_6
-#define GLCD_DB4_GPIO_Port GPIOB
-#define GLCD_DB5_Pin GPIO_PIN_7
-#define GLCD_DB5_GPIO_Port GPIOB
-#define GLCD_DB2_Pin GPIO_PIN_8
-#define GLCD_DB2_GPIO_Port GPIOB
-#define GLCD_DB3_Pin GPIO_PIN_9
-#define GLCD_DB3_GPIO_Port GPIOB
-#define GLCD_DB0_Pin GPIO_PIN_0
-#define GLCD_DB0_GPIO_Port GPIOE
-#define GLCD_DB1_Pin GPIO_PIN_1
-#define GLCD_DB1_GPIO_Port GPIOE
+#define GLCD_RESET_Pin GPIO_PIN_5
+#define GLCD_RESET_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
