@@ -524,8 +524,11 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, GLCD_CD_Pin|GLCD_RD_Pin|GLCD_CE_Pin|GLCD_WR_Pin
-                          |GLCD_DB0_Pin|GLCD_DB1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, GLCD_CD_Pin|GLCD_CE_Pin|GLCD_WR_Pin|GLCD_DB0_Pin
+                          |GLCD_DB1_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GLCD_RD_GPIO_Port, GLCD_RD_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(OTG_FS_PowerSwitchOn_GPIO_Port, OTG_FS_PowerSwitchOn_Pin, GPIO_PIN_SET);
