@@ -132,6 +132,8 @@
 #define SYM_STOP							(7)
 #define SYM_USB								(8)
 #define SYM_HYPHEN							(9)
+#define SYM_ARROW_RIGHT						(10)
+#define SYM_ARROW_LEFT						(11)
 
 // MENU INDEX
 typedef enum

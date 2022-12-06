@@ -259,6 +259,9 @@ static uint8_t settings_period_button(uint8_t _index)
 		lcd_symbol_string_inv(SETT_PERIOD_BUTTON_START_X + LINE_WIDTH, SETT_PERIOD_BUTTON_START_Y + LINE_WIDTH + SPACE, measure_period_get_text(_index));
 	}
 
+	lcd_symbol_symb(SETT_PERIOD_BUTTON_START_X - LETTER_X, SETT_PERIOD_BUTTON_START_Y + LINE_WIDTH + SPACE, SYM_ARROW_LEFT);
+	lcd_symbol_symb(SETT_PERIOD_BUTTON_START_X + SETT_PERIOD_BUTTON_LENGTH_X, SETT_PERIOD_BUTTON_START_Y + LINE_WIDTH + SPACE, SYM_ARROW_RIGHT);
+
 	return 0;
 }
 
