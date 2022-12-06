@@ -9,6 +9,7 @@
 
 #include "buffer_lcd.h"
 #include "calc.h"
+
 #include "lcd_matrix.h"
 #include "lcd_menu_coord.h"
 #include "lcd_symbol.h"
@@ -20,35 +21,11 @@ char value_string[][13] =
 		"ADC 13",
 };
 
-
 buffer_info_t lcd_value_buffer[1] = { 0 };
 
-/*
-static void dec_to_hex(uint16_t dec, char * hex)
+
+static uint8_t __draw_values(void)
 {
-	uint8_t i = 4;
-
-	while(dec != 0 && i < 5)
-	{
-		char temp = dec % 16;
-		dec /= 16;
-
-		if(temp < 10)
-			temp = temp + '0';
-		else
-			temp = temp + 55;
-
-		hex[i]= temp;
-		i--;
-	}
-}
-*/
-//#include <string.h>
-
-uint8_t lcd_body_value_draw(void)
-{
-	buffer_lcd_get_last_values(lcd_value_buffer);
-
 	for(uint8_t i = 0; i < 4; i++)
 	{
 		char tmp[10] = {0};
@@ -83,44 +60,30 @@ uint8_t lcd_body_value_draw(void)
 		lcd_symbol_string(VALUE_COL1_NUMBER_START_X, VALUE_COL1_NUMBER_START_Y + offset, tmp);
 	}
 
-	/*
-	for(uint8_t i = 0; i < 6; i++)
+	return 0;
+}
+
+
+uint8_t lcd_body_value_draw(void)
+{
+	// initialize to the maximum value of hours to get the first value
+	lcd_value_buffer[0].hour = 0xFF;
+
+	if(!buffer_lcd_get_lastest_value(lcd_value_buffer))
 	{
-		char tmp[10] = {0};
-
-		uint16_t offset = i * (VALUE_INFO_LENGTH_Y + VALUE_BOX_SPACE);
-		lcd_symbol_string(VALUE_COL1_TEXT_START_X, VALUE_COL1_TEXT_START_Y + offset, value_string[i]);
-
-		float value = calc_temp(lcd_value_buffer[0].buffer[i]);
-		sprintf(tmp, "%.2f°C", value);
-
-		lcd_matrix_reset(VALUE_COL1_RECT_START_X, VALUE_COL1_RECT_START_Y + offset, VALUE_RECT_LENGTH_X, VALUE_RECT_LENGTH_Y);
-		lcd_symbol_rect(VALUE_COL1_RECT_START_X, VALUE_COL1_RECT_START_Y + offset, VALUE_RECT_LENGTH_X, VALUE_RECT_LENGTH_Y);
-		lcd_symbol_string(VALUE_COL1_NUMBER_START_X, VALUE_COL1_NUMBER_START_Y + offset, tmp);
+		__draw_values();
 	}
-
-	for(uint8_t i = 0; i < 6; i++)
-	{
-		char tmp[10] = {0};
-
-		uint16_t offset = i * (VALUE_INFO_LENGTH_Y + VALUE_BOX_SPACE);
-		lcd_symbol_string(VALUE_COL2_TEXT_START_X, VALUE_COL2_TEXT_START_Y + offset, value_string[i + 6]);
-
-		float value = calc_temp(lcd_value_buffer[0].buffer[i + 6]);
-		sprintf(tmp, "%.2f°C", value);
-
-		lcd_matrix_reset(VALUE_COL2_RECT_START_X, VALUE_COL2_RECT_START_Y + offset, VALUE_RECT_LENGTH_X, VALUE_RECT_LENGTH_Y);
-		lcd_symbol_rect(VALUE_COL2_RECT_START_X, VALUE_COL2_RECT_START_Y + offset, VALUE_RECT_LENGTH_X, VALUE_RECT_LENGTH_Y);
-		lcd_symbol_string(VALUE_COL2_NUMBER_START_X, VALUE_COL2_NUMBER_START_Y + offset, tmp);
-	}
-	*/
 
 	return 0;
 }
 
 uint8_t lcd_body_value_update(void)
 {
-	lcd_body_value_draw();
+	if(!buffer_lcd_get_lastest_value(lcd_value_buffer))
+	{
+		__draw_values();
+		return 0;
+	}
 
-	return 0;
+	return 1;
 }

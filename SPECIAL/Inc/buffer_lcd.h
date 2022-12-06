@@ -13,7 +13,7 @@
 size_t buffer_lcd_get_count(void);
 uint8_t buffer_lcd_set_value(uint32_t *value, size_t length);
 uint8_t buffer_lcd_get_values(buffer_info_t* buffer, size_t count);
-uint8_t buffer_lcd_get_last_values(buffer_info_t* buffer);
+uint8_t buffer_lcd_get_lastest_value(buffer_info_t* buffer);
 
 void buffer_lcd_stop(void);
 

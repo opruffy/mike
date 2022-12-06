@@ -123,9 +123,9 @@ uint8_t buffer_lcd_get_values(buffer_info_t* buffer, size_t count)
 	return 0;
 }
 
-uint8_t buffer_lcd_get_last_values(buffer_info_t* buffer)
+uint8_t buffer_lcd_get_lastest_value(buffer_info_t* buffer)
 {
-	uint32_t _index = 0;
+	size_t _index = 0;
 
 	if(buffer_lcd_w_index == 0)
 	{
@@ -143,8 +143,15 @@ uint8_t buffer_lcd_get_last_values(buffer_info_t* buffer)
 		_index = buffer_lcd_w_index - 1;
 	}
 
-	memcpy(buffer, &buffer_lcd[_index], sizeof(buffer_lcd[0]));
-	return 0;
+	if(	(buffer_lcd[_index].sec != buffer[0].sec)
+		|| (buffer_lcd[_index].min != buffer[0].min)
+		|| (buffer_lcd[_index].hour != buffer[0].hour))
+	{
+		memcpy(buffer, &buffer_lcd[_index], sizeof(buffer_lcd[0]));
+		return 0;
+	}
+
+	return 1;
 }
 
 void buffer_lcd_stop(void)
