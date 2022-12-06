@@ -28,7 +28,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	else if(htim == &htim3)
 	{
 	 	lcd_update();
-	 	measure_mode_status_update();
 	}
 	else if(htim == &htim6)
 	{

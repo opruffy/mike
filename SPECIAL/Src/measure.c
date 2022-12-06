@@ -36,6 +36,13 @@ uint8_t measure_mode_status_get_changed(void)
 	return 1;
 }
 
+/*
+ * call update when
+ * - starting never
+ * - running after lcd update
+ * - pause in main
+ * - stop in main
+ */
 void measure_mode_status_update(void)
 {
 	if(measure_mode_status == MEASURE_MODE_STATUS_CHANGED)

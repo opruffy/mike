@@ -133,26 +133,30 @@ int main(void)
  	adc_transfer_data_to_buffer();
  	usb_statemachine();
 
- 	// Pause
- 	if(!measure_get_mode_pause())
+ 	if(!measure_mode_status_get_changed())
  	{
- 		// TODO testen
-		HAL_TIM_Base_Stop_IT(&htim6);
- 		measure_period_reset_status();
+		// Pause
+		if(!measure_get_mode_pause())
+		{
+			// TODO testen
+			HAL_TIM_Base_Stop_IT(&htim6);
+			measure_period_reset_status();
+			measure_mode_status_update();
+		}
+		// Stop
+		else if(!measure_get_mode_stop())
+		{
+			// TODO testen
+			HAL_TIM_Base_Stop_IT(&htim6);
+			adc_stop();
+			usb_stop();
+			lcd_stop();
+			clock_reset();
+			debug_reset_counter();
+			measure_period_reset_status();
+			measure_mode_status_update();
+		}
  	}
- 	// Stop
- 	else if(!measure_get_mode_stop())
- 	{
- 		// TODO testen
-		HAL_TIM_Base_Stop_IT(&htim6);
- 		adc_stop();
- 		usb_stop();
- 		lcd_stop();
- 		clock_reset();
- 		debug_reset_counter();
- 		measure_period_reset_status();
- 	}
-
   }
   /* USER CODE END 3 */
 }
