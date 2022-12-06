@@ -81,8 +81,6 @@ uint8_t lcd_initialize(void)
 	lcd_reset();
 	lcd_set_font();
 
-	while((lcd_status_read() & 0x23) != 0x23);
-
 	__asm("NOP");__asm("NOP");
 	__asm("NOP");__asm("NOP");
 	__asm("NOP");__asm("NOP");
@@ -96,15 +94,8 @@ uint8_t lcd_initialize(void)
 
 	set_address_pointer(0);
 
-	if(lcd_cmd_write(LCD_DISPLAY_MODE | LCD_DISPLAY_TEXT_ON | LCD_DISPLAY_GRAPHIC_ON))
-	{
-		return 7;
-	}
-
-	if(lcd_cmd_write(LCD_MODE_SET | LCD_MODE_OR | LCD_MODE_INTERNAL_CG_ROM))
-	{
-		return 8;
-	}
+	lcd_cmd_write(LCD_DISPLAY_MODE | LCD_DISPLAY_TEXT_ON | LCD_DISPLAY_GRAPHIC_ON);
+	lcd_cmd_write(LCD_MODE_SET | LCD_MODE_OR | LCD_MODE_INTERNAL_CG_ROM);
 
 	clear_display(0);
 
@@ -115,28 +106,16 @@ uint8_t lcd_initialize(void)
 
 uint8_t lcd_set_pixel(uint16_t x, uint16_t y)
 {
-	uint8_t setBit = LCD_BIT | LCD_BIT_SET | (7 - (x % 8));
-
 	set_address_pointer(GRAPHIC_HOME + (uint16_t)(x / 8) + y * 30);
-
-	if(lcd_cmd_write(setBit))
-	{
-		return 1;
-	}
+	lcd_cmd_write(LCD_BIT | LCD_BIT_SET | (7 - (x % 8)));
 
 	return 0;
 }
 
 uint8_t lcd_clear_pixel(uint16_t x, uint16_t y)
 {
-	uint8_t setBit = LCD_BIT | LCD_BIT_RESET | (7 - (x % 8));
-
 	set_address_pointer(GRAPHIC_HOME + (uint16_t)(x / 8) + y * 30);
-
-	if(lcd_cmd_write(setBit))
-	{
-		return 1;
-	}
+	lcd_cmd_write(LCD_BIT | LCD_BIT_RESET | (7 - (x % 8)));
 
 	return 0;
 }

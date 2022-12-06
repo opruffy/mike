@@ -11,13 +11,6 @@
 #include <stdint.h>
 
 // MEASURE PERIOD
-void measure_period_set_1min(void);
-uint8_t measure_period_get_1min(void);
-void measure_period_set_5min(void);
-uint8_t measure_period_get_5min(void);
-void measure_period_set_10min(void);
-uint8_t measure_period_get_10min(void);
-
 uint32_t measure_period_get_current_value(void);
 void measure_period_set_mode(uint8_t _index);
 uint8_t measure_period_get_current_mode(void);
