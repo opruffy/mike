@@ -9,7 +9,6 @@
 
 #include "measure.h"
 #include "measure_period.h"
-#include "tim.h"
 
 #include "lcd_display_view.h"
 #include "lcd_matrix.h"
@@ -23,6 +22,7 @@
 #define SETT_FLIP_TEXT						("DISPLAY FLIP  ")
 
 uint8_t lcd_period_mode_index = 0;
+uint8_t settings_changed = 0;
 
 
 static void settings_start_draw(void)
@@ -99,6 +99,7 @@ static void settings_draw_basic(void)
 uint8_t lcd_body_settings_start_trigger_ok(void)
 {
 	measure_set_mode_start();
+	settings_changed = 1;
 
 	return 0;
 }
@@ -108,6 +109,7 @@ static uint8_t settings_start_button_draw(void)
 	if(!measure_get_mode_running())
 	{
 		lcd_symbol_rect_filled(SETT_START_LEFT_START_X, SETT_START_LEFT_START_Y, SETT_START_LEFT_LENGTH_X, SETT_START_LEFT_LENGTH_Y);
+		lcd_symbol_rect_clear(SETT_START_RIGHT_START_X, SETT_START_RIGHT_START_Y, SETT_START_RIGHT_LENGTH_X, SETT_START_RIGHT_LENGTH_Y);
 		lcd_symbol_rect(SETT_START_RIGHT_START_X, SETT_START_RIGHT_START_Y, SETT_START_RIGHT_LENGTH_X, SETT_START_RIGHT_LENGTH_Y);
 		lcd_symbol_string(SETT_START_RIGHT_START_X + LINE_WIDTH, SETT_START_RIGHT_START_Y + LINE_WIDTH + SPACE, "GO");
 	}
@@ -132,15 +134,22 @@ uint8_t lcd_body_settings_start_draw(void)
 
 uint8_t lcd_body_settings_start_update(void)
 {
-	settings_start_button_draw();
+	if(settings_changed)
+	{
+		settings_start_button_draw();
+		settings_changed = 0;
 
-	return 0;
+		return 0;
+	}
+
+	return 1;
 }
 
 // SETTINGS PAUSE
 uint8_t lcd_body_settings_pause_trigger_ok(void)
 {
 	measure_set_mode_pause();
+	settings_changed = 1;
 
 	return 0;
 }
@@ -150,6 +159,7 @@ static uint8_t settings_pause_button_draw(void)
 	if(!measure_get_mode_pause())
 	{
 		lcd_symbol_rect_filled(SETT_START_LEFT_START_X, SETT_START_LEFT_START_Y, SETT_START_LEFT_LENGTH_X, SETT_START_LEFT_LENGTH_Y);
+		lcd_symbol_rect_clear(SETT_START_RIGHT_START_X, SETT_START_RIGHT_START_Y, SETT_START_RIGHT_LENGTH_X, SETT_START_RIGHT_LENGTH_Y);
 		lcd_symbol_rect(SETT_START_RIGHT_START_X, SETT_START_RIGHT_START_Y, SETT_START_RIGHT_LENGTH_X, SETT_START_RIGHT_LENGTH_Y);
 		lcd_symbol_string(SETT_START_RIGHT_START_X + LINE_WIDTH, SETT_START_RIGHT_START_Y + LINE_WIDTH + SPACE, "PA");
 	}
@@ -167,20 +177,29 @@ uint8_t lcd_body_settings_pause_draw(void)
 	settings_draw_basic();
 	settings_pause_draw_inv();
 
+	settings_pause_button_draw();
+
 	return 0;
 }
 
 uint8_t lcd_body_settings_pause_update(void)
 {
-	settings_pause_button_draw();
+	if(settings_changed)
+	{
+		settings_pause_button_draw();
+		settings_changed = 0;
 
-	return 0;
+		return 0;
+	}
+
+	return 1;
 }
 
 // SETTINGS STOP
 uint8_t lcd_body_settings_stop_trigger_ok(void)
 {
 	measure_set_mode_stop();
+	settings_changed = 1;
 
 	return 0;
 }
@@ -190,6 +209,7 @@ static uint8_t settings_stop_button_draw(void)
 	if(!measure_get_mode_stop())
 	{
 		lcd_symbol_rect_filled(SETT_START_LEFT_START_X, SETT_START_LEFT_START_Y, SETT_START_LEFT_LENGTH_X, SETT_START_LEFT_LENGTH_Y);
+		lcd_symbol_rect_clear(SETT_START_RIGHT_START_X, SETT_START_RIGHT_START_Y, SETT_START_RIGHT_LENGTH_X, SETT_START_RIGHT_LENGTH_Y);
 		lcd_symbol_rect(SETT_START_RIGHT_START_X, SETT_START_RIGHT_START_Y, SETT_START_RIGHT_LENGTH_X, SETT_START_RIGHT_LENGTH_Y);
 		lcd_symbol_string(SETT_START_RIGHT_START_X + LINE_WIDTH, SETT_START_RIGHT_START_Y + LINE_WIDTH + SPACE, "ST");
 	}
@@ -207,21 +227,29 @@ uint8_t lcd_body_settings_stop_draw(void)
 	settings_draw_basic();
 	settings_stop_draw_inv();
 
-	return 0;
-}
-
-uint8_t lcd_body_settings_stop_update(void)
-{
 	settings_stop_button_draw();
 
 	return 0;
 }
 
+uint8_t lcd_body_settings_stop_update(void)
+{
+	if(settings_changed)
+	{
+		settings_stop_button_draw();
+		settings_changed = 0;
+
+		return 0;
+	}
+
+	return 1;
+}
+
 static uint8_t settings_period_button(uint8_t _index)
 {
-	// TODO testen!
 	if(_index != measure_period_get_current_mode())
 	{
+		lcd_symbol_rect_clear(SETT_PERIOD_BUTTON_START_X, SETT_PERIOD_BUTTON_START_Y, SETT_PERIOD_BUTTON_LENGTH_X, SETT_PERIOD_BUTTON_LENGTH_Y);
 		lcd_symbol_rect(SETT_PERIOD_BUTTON_START_X, SETT_PERIOD_BUTTON_START_Y, SETT_PERIOD_BUTTON_LENGTH_X, SETT_PERIOD_BUTTON_LENGTH_Y);
 		lcd_symbol_string(SETT_PERIOD_BUTTON_START_X + LINE_WIDTH, SETT_PERIOD_BUTTON_START_Y + LINE_WIDTH + SPACE, measure_period_get_text(_index));
 	}
@@ -244,6 +272,7 @@ static uint8_t settings_period_button_draw(void)
 uint8_t lcd_body_settings_period_trigger_left(void)
 {
 	lcd_period_mode_index = measure_period_get_previous_mode(lcd_period_mode_index);
+	settings_changed = 1;
 
 	return 0;
 }
@@ -251,6 +280,7 @@ uint8_t lcd_body_settings_period_trigger_left(void)
 uint8_t lcd_body_settings_period_trigger_right(void)
 {
 	lcd_period_mode_index = measure_period_get_next_mode(lcd_period_mode_index);
+	settings_changed = 1;
 
 	return 0;
 }
@@ -258,6 +288,7 @@ uint8_t lcd_body_settings_period_trigger_right(void)
 uint8_t lcd_body_settings_period_trigger_ok(void)
 {
 	measure_period_set_mode(lcd_period_mode_index);
+	settings_changed = 1;
 
 	return 0;
 }
@@ -275,12 +306,19 @@ uint8_t lcd_body_settings_period_draw(void)
 
 uint8_t lcd_body_settings_period_update(void)
 {
-	settings_period_button(lcd_period_mode_index);
+	if(settings_changed)
+	{
+		settings_period_button(lcd_period_mode_index);
+		settings_changed = 0;
 
-	return 0;
+		return 0;
+	}
+
+	return 1;
 }
 
 // SETTINGS FLIP
+
 uint8_t lcd_body_settings_flip_trigger_ok(void)
 {
 	if(lcd_display_view_is_original())
@@ -291,6 +329,7 @@ uint8_t lcd_body_settings_flip_trigger_ok(void)
 	{
 		lcd_display_view_reset_flip();
 	}
+	settings_changed = 1;
 
 	return 0;
 }
@@ -324,7 +363,19 @@ uint8_t lcd_body_settings_flip_draw(void)
 
 uint8_t lcd_body_settings_flip_update(void)
 {
-	lcd_body_settings_flip_button_draw();
+	if(settings_changed)
+	{
+		settings_draw_basic();
+		settings_flip_draw_inv();
 
-	return 0;
+		lcd_body_settings_flip_button_draw();
+
+		measure_mode_status_set_changed();
+
+		settings_changed = 0;
+
+		return 0;
+	}
+
+	return 1;
 }
