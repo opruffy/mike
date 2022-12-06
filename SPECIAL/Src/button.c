@@ -29,31 +29,31 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	switch(GPIO_Pin)
 	{
 		case UP_Pin:
-			if(HAL_GPIO_ReadPin(UP_GPIO_Port, UP_Pin) != GPIO_PIN_SET)
+			if(HAL_GPIO_ReadPin(UP_GPIO_Port, UP_Pin) != GPIO_PIN_RESET)
 			{
 				pressed_button |= BUTTON_UP_MASK;
 			}
 			break;
 		case DOWN_Pin:
-			if(HAL_GPIO_ReadPin(DOWN_GPIO_Port, DOWN_Pin) != GPIO_PIN_SET)
+			if(HAL_GPIO_ReadPin(DOWN_GPIO_Port, DOWN_Pin) != GPIO_PIN_RESET)
 			{
 				pressed_button |= BUTTON_DOWN_MASK;
 			}
 			break;
 		case LEFT_Pin:
-			if(HAL_GPIO_ReadPin(LEFT_GPIO_Port, LEFT_Pin) != GPIO_PIN_SET)
+			if(HAL_GPIO_ReadPin(LEFT_GPIO_Port, LEFT_Pin) != GPIO_PIN_RESET)
 			{
 				pressed_button |= BUTTON_LEFT_MASK;
 			}
 			break;
 		case RIGHT_Pin:
-			if(HAL_GPIO_ReadPin(RIGHT_GPIO_Port, RIGHT_Pin) != GPIO_PIN_SET)
+			if(HAL_GPIO_ReadPin(RIGHT_GPIO_Port, RIGHT_Pin) != GPIO_PIN_RESET)
 			{
 				pressed_button |= BUTTON_RIGHT_MASK;
 			}
 			break;
 		case PUSH_Pin:
-			if(HAL_GPIO_ReadPin(PUSH_GPIO_Port, PUSH_Pin) != GPIO_PIN_SET)
+			if(HAL_GPIO_ReadPin(PUSH_GPIO_Port, PUSH_Pin) != GPIO_PIN_RESET)
 			{
 				pressed_button |= BUTTON_OK_MASK;
 			}
