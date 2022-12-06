@@ -54,6 +54,17 @@ void lcd_symbol_rect_filled(uint16_t x, uint16_t y, size_t x_length, size_t y_le
 	}
 }
 
+void lcd_symbol_rect_clear(uint16_t x, uint16_t y, size_t x_length, size_t y_length)
+{
+	for(size_t _x = 0; _x < x_length; _x++)
+	{
+		for(size_t _y = 0; _y < y_length; _y++)
+		{
+			lcd_matrix_clear_pixel(x + _x, y + _y);
+		}
+	}
+}
+
 // SYMBOL
 static void set_symbol_in_matrix(uint16_t x, uint16_t y, uint8_t symbol[LETTER_Y][LETTER_X])
 {

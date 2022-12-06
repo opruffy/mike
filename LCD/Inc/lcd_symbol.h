@@ -15,6 +15,7 @@ void lcd_symbol_rect(uint16_t x, uint16_t y, size_t x_length, size_t y_length);
 void lcd_symbol_rect_inv(uint16_t x, uint16_t y, size_t x_length, size_t y_length);
 
 void lcd_symbol_rect_filled(uint16_t x, uint16_t y, size_t x_length, size_t y_length);
+void lcd_symbol_rect_clear(uint16_t x, uint16_t y, size_t x_length, size_t y_length);
 
 void lcd_symbol_string(uint16_t x, uint16_t y, char* string);
 void lcd_symbol_string_inv(uint16_t x, uint16_t y, char* string);
