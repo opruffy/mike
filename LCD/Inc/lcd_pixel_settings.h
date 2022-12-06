@@ -105,7 +105,7 @@
 #define HEAD_TIME_Y						(2 * SPACE)
 
 #define HEAD_TIME_LENGTH_X				(10 * LETTER_X)
-#define HEAD_TIME_LENGTH_Y				(LETTER_Y)
+#define HEAD_TIME_LENGTH_Y				(SPACE + LETTER_Y)
 
 // - MEASURE MODE
 #define HEAD_MEASURE_MODE_X				(HEAD_TIME_X - LETTER_X - 2 * SPACE)
@@ -156,9 +156,7 @@ typedef enum
 	menu_debug_body,
 
 	// other tasks
-	menu_change_main_menu,
 	menu_noaction,
-
 }menu_task_t;
 
 #endif /* LCD_PIXEL_SETTINGS_H_ */
