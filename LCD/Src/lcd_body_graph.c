@@ -97,7 +97,7 @@ uint8_t arrow_axis[][ARROW_LENGTH_Y][ARROW_LENGTH_X]=
 };
 
 
-static uint8_t lcd_axis_arrow(uint16_t x, uint16_t y, uint8_t i)
+static uint8_t __set_axis_arrow(uint16_t x, uint16_t y, uint8_t i)
 {
 	for(uint16_t _y = 0; _y < ARROW_LENGTH_Y; _y++)
 	{
@@ -116,17 +116,17 @@ static uint8_t lcd_axis_arrow(uint16_t x, uint16_t y, uint8_t i)
 	return 0;
 }
 
-static void lcd_x_axis_name(uint16_t x, uint16_t y)
-{
-	lcd_symbol_string(x, y, "T[\xB0\x43]");
-}
-
-static void lcd_y_axis_name(uint16_t x, uint16_t y)
+static void __set_axis_x_name(uint16_t x, uint16_t y)
 {
 	lcd_symbol_string(x, y, "t[min]");
 }
 
-static void lcd_x_axis_inc(void)
+static void __set_axis_y_name(uint16_t x, uint16_t y)
+{
+	lcd_symbol_string(x, y, "T[\xB0\x43]");
+}
+
+static void __set_axis_x_inc(void)
 {
 	for(uint16_t i = X_AXIS_INC_DISTANZ; i <= X_AXIS_LENGTH_X; i += X_AXIS_INC_DISTANZ)
 	{
@@ -134,7 +134,7 @@ static void lcd_x_axis_inc(void)
 	}
 }
 
-static void lcd_y_axis_inc(void)
+static void __set_axis_y_inc(void)
 {
 	for(uint16_t i = Y_AXIS_INC_DISTANZ; i <= Y_AXIS_LENGTH_Y; i += Y_AXIS_INC_DISTANZ)
 	{
@@ -142,7 +142,7 @@ static void lcd_y_axis_inc(void)
 	}
 }
 
-static void lcd_body_x_axis(void)
+static void __set_axis_x_line(void)
 {
 	for(uint16_t x = 0; x < (X_AXIS_ORIGIN_X - X_AXIS_START_X); x++)
 	{
@@ -155,7 +155,7 @@ static void lcd_body_x_axis(void)
 	}
 }
 
-static void lcd_body_y_axis(void)
+static void __set_axis_y_line(void)
 {
 	for(uint16_t y = 0; y < (Y_AXIS_START_Y - Y_AXIS_ORIGIN_Y); y++)
 	{
@@ -168,7 +168,22 @@ static void lcd_body_y_axis(void)
 	}
 }
 
-static void lcd_body_graph_set_x_axis(uint32_t x_axis, uint32_t _time)
+void __set_axis_init(void)
+{
+	__set_axis_x_line();
+	__set_axis_y_line();
+
+	__set_axis_arrow(X_AXIS_ARROW_START_X, X_AXIS_ARROW_START_Y, ARROW_RIGHT);
+	__set_axis_arrow(Y_AXIS_ARROW_START_X, Y_AXIS_ARROW_START_Y, ARROW_UP);
+
+	__set_axis_x_inc();
+	__set_axis_y_inc();
+
+	__set_axis_x_name(X_AXIS_NAME_X, X_AXIS_NAME_Y);
+	__set_axis_y_name(Y_AXIS_NAME_X, Y_AXIS_NAME_Y);
+}
+
+static void __set_axis_x_value(uint32_t x_axis, uint32_t _time)
 {
 	char tmp[6] = {0};
 	uint32_t offset = 0;
@@ -201,7 +216,7 @@ static void lcd_body_graph_set_x_axis(uint32_t x_axis, uint32_t _time)
 
 #define round(x)    ((uint16_t) (x + .5))
 
-static void lcd_body_graph_set_y_axis(uint32_t y_axis, float value)
+static void __set_axis_y_value(uint32_t y_axis, float value)
 {
 	char tmp[4] = {0};
 	uint32_t offset = 0;
@@ -225,7 +240,7 @@ static void lcd_body_graph_set_y_axis(uint32_t y_axis, float value)
 	lcd_symbol_string(offset, y_axis, tmp);
 }
 
-static void lcd_body_graph_x_axis(void)
+static void __set_axis_x(void)
 {
 	uint32_t _time = 0;
 
@@ -234,29 +249,38 @@ static void lcd_body_graph_x_axis(void)
 		// initial max time in minutes for all measuring points in graph
 		_time = measure_period_get_current_value() * LCD_GRAPH_BUFFER_SIZE / 600; // TODO 600 .. 60 sec->min; 10 msec->sec
 
-		lcd_body_graph_set_x_axis(X_AXIS_ORIGIN_X + X_AXIS_INC_DISTANZ, _time / 3);
-		lcd_body_graph_set_x_axis(X_AXIS_ORIGIN_X + X_AXIS_INC_DISTANZ * 2, _time * 2 / 3);
-		lcd_body_graph_set_x_axis(X_AXIS_ORIGIN_X + X_AXIS_INC_DISTANZ * 3, _time);
+		__set_axis_x_value(X_AXIS_ORIGIN_X + X_AXIS_INC_DISTANZ, _time / 3);
+		__set_axis_x_value(X_AXIS_ORIGIN_X + X_AXIS_INC_DISTANZ * 2, _time * 2 / 3);
+		__set_axis_x_value(X_AXIS_ORIGIN_X + X_AXIS_INC_DISTANZ * 3, _time);
 	}
 	else
 	{
 		_time = lcd_graph_buffer[data_length - 1].min + lcd_graph_buffer[data_length - 1].hour * 60;
 
-		lcd_body_graph_set_x_axis(X_AXIS_ORIGIN_X + X_AXIS_INC_DISTANZ, _time - LCD_GRAPH_BUFFER_SIZE * 2 / 3);
-		lcd_body_graph_set_x_axis(X_AXIS_ORIGIN_X + X_AXIS_INC_DISTANZ * 2, _time - LCD_GRAPH_BUFFER_SIZE / 3);
-		lcd_body_graph_set_x_axis(X_AXIS_ORIGIN_X + X_AXIS_INC_DISTANZ * 3, _time);
+		__set_axis_x_value(X_AXIS_ORIGIN_X + X_AXIS_INC_DISTANZ, _time - LCD_GRAPH_BUFFER_SIZE * 2 / 3);
+		__set_axis_x_value(X_AXIS_ORIGIN_X + X_AXIS_INC_DISTANZ * 2, _time - LCD_GRAPH_BUFFER_SIZE / 3);
+		__set_axis_x_value(X_AXIS_ORIGIN_X + X_AXIS_INC_DISTANZ * 3, _time);
 	}
 }
 
-static void lcd_body_graph_y_axis(float max_value)
+static void __set_axis_y(float max_value)
 {
-	lcd_body_graph_set_y_axis(Y_AXIS_ORIGIN_Y - Y_AXIS_INC_DISTANZ - 2, max_value / 3);
-	lcd_body_graph_set_y_axis(Y_AXIS_ORIGIN_Y - Y_AXIS_INC_DISTANZ * 2 - 2, max_value * 2 / 3);
-	lcd_body_graph_set_y_axis(Y_AXIS_ORIGIN_Y - Y_AXIS_INC_DISTANZ * 3 - 2, max_value);
+	__set_axis_y_value(Y_AXIS_ORIGIN_Y - Y_AXIS_INC_DISTANZ - 2, max_value / 3);
+	__set_axis_y_value(Y_AXIS_ORIGIN_Y - Y_AXIS_INC_DISTANZ * 2 - 2, max_value * 2 / 3);
+	__set_axis_y_value(Y_AXIS_ORIGIN_Y - Y_AXIS_INC_DISTANZ * 3 - 2, max_value);
 }
 
 static void lcd_body_graph_number(char* str)
 {
+//	size_t len_x = 0;
+//
+//	while(*string)
+//	{
+//		*string++;
+//		len_x += LETTER_X;
+//	}
+//
+//	lcd_matrix_reset(240 - 8*8, BODY_SUB_HOME_Y, len_x, LETTER_Y);
 	lcd_symbol_string(240 - 8*8, BODY_SUB_HOME_Y, str);		// TODO numbers
 }
 
@@ -267,7 +291,7 @@ static void lcd_body_graph_adc_order(char* str, uint8_t _index)
 
 static void lcd_body_graph_menu(uint8_t _index)
 {
-	lcd_axis_arrow(GRAPH_MENU_AXIS_UP_START_X, GRAPH_MENU_AXIS_UP_START_Y, ARROW_UP);
+	__set_axis_arrow(GRAPH_MENU_AXIS_UP_START_X, GRAPH_MENU_AXIS_UP_START_Y, ARROW_UP);
 
 	for(uint16_t y = 0; y < GRAPH_MENU_AXIS_LENGTH; y++)
 	{
@@ -276,7 +300,7 @@ static void lcd_body_graph_menu(uint8_t _index)
 
 	lcd_symbol_rect_filled(GRAPH_MENU_AXIS_START_X - 1, GRAPH_MENU_AXIS_START_Y + _index * GRAPH_MENU_CUBE_GAB, GRAPH_MENU_CUBE_LENGTH, GRAPH_MENU_CUBE_LENGTH);
 
-	lcd_axis_arrow(GRAPH_MENU_AXIS_DOWN_START_X, GRAPH_MENU_AXIS_DOWN_START_Y, ARROW_DOWN);
+	__set_axis_arrow(GRAPH_MENU_AXIS_DOWN_START_X, GRAPH_MENU_AXIS_DOWN_START_Y, ARROW_DOWN);
 }
 
 static uint8_t lcd_body_graph_reset(void)
@@ -344,28 +368,18 @@ static void lcd_body_graph_diagram_draw(uint8_t _index)
 		}
 	}
 
-	lcd_body_graph_x_axis();
-	lcd_body_graph_y_axis(maximum);
+	__set_axis_x();
+	__set_axis_y(maximum);
 }
 
 uint8_t lcd_body_graph_draw(void)
 {
-	lcd_body_x_axis();
-	lcd_body_y_axis();
-
-	lcd_axis_arrow(X_AXIS_ARROW_START_X, X_AXIS_ARROW_START_Y, ARROW_RIGHT);
-	lcd_axis_arrow(Y_AXIS_ARROW_START_X, Y_AXIS_ARROW_START_Y, ARROW_UP);
-
-	lcd_y_axis_name(X_AXIS_NAME_X, X_AXIS_NAME_Y);
-	lcd_x_axis_name(Y_AXIS_NAME_X, Y_AXIS_NAME_Y);
-
-	lcd_x_axis_inc();
-	lcd_y_axis_inc();
+	__set_axis_init();
 
 	lcd_body_graph_diagram_draw(lcd_graph_index);
-	lcd_body_graph_menu(lcd_graph_index);
+	//lcd_body_graph_menu(lcd_graph_index);
 
-	lcd_body_graph_number(lcd_graph_buffer_string[lcd_graph_index]);
+	//lcd_body_graph_number(lcd_graph_buffer_string[lcd_graph_index]);
 
 	return 0;
 }
@@ -397,17 +411,27 @@ uint8_t lcd_body_graph_update(void)
 		lcd_body_graph_reset();
 		lcd_body_graph_diagram_draw(lcd_graph_index);
 
+		lcd_body_graph_menu(lcd_graph_index);
+		lcd_body_graph_number(lcd_graph_buffer_string[lcd_graph_index]);
+
 		lcd_graph_index_changed = 0;
+
+		return 0;
 	}
 	else if(lcd_graph_index_changed)
 	{
 		lcd_body_graph_reset();
 		lcd_body_graph_diagram_draw(lcd_graph_index);
 
+		lcd_body_graph_menu(lcd_graph_index);
+		lcd_body_graph_number(lcd_graph_buffer_string[lcd_graph_index]);
+
 		lcd_graph_index_changed = 0;
+
+		return 0;
 	}
 
-	return 0;
+	return 1;
 }
 
 uint8_t lcd_body_graph_trigger_up(void)
