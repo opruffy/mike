@@ -15,6 +15,7 @@
 #include "measure_period.h"
 
 #define COUNT_FOR_MEAN		(11)
+#define INDEX_FOR_MEAN		((COUNT_FOR_MEAN - 1) / 2)
 
 #define COUNT_OF_USED_ADC	(13)
 
@@ -75,8 +76,8 @@ void adc_transfer_data_to_buffer(void)
 					__sort_bubble((uint16_t *)&adc_value_buffer[0][i], sizeof(adc_value_buffer[0]) / sizeof(adc_value_buffer[0][0]), sizeof(adc_value_buffer) / sizeof(adc_value_buffer[0]));
 				}
 
-				buffer_lcd_set_value((uint32_t *)&adc_value_buffer[5], COUNT_OF_USED_ADC);
-				buffer_usb_set_value((uint32_t *)&adc_value_buffer[5], COUNT_OF_USED_ADC);
+				buffer_lcd_set_value((uint32_t *)&adc_value_buffer[INDEX_FOR_MEAN], COUNT_OF_USED_ADC);
+				buffer_usb_set_value((uint32_t *)&adc_value_buffer[INDEX_FOR_MEAN], COUNT_OF_USED_ADC);
 				adc_value_index = 0;
 
 				measure_period_set_status_finished();
