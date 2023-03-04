@@ -99,7 +99,6 @@ static void settings_draw_basic(void)
 uint8_t lcd_body_settings_start_trigger_ok(void)
 {
 	measure_set_mode_start();
-	settings_changed = 1;
 
 	return 0;
 }
@@ -134,15 +133,9 @@ uint8_t lcd_body_settings_start_draw(void)
 
 uint8_t lcd_body_settings_start_update(void)
 {
-	if(settings_changed)
-	{
-		settings_start_button_draw();
-		settings_changed = 0;
+	settings_start_button_draw();
 
-		return 0;
-	}
-
-	return 1;
+	return 0;
 }
 
 // SETTINGS PAUSE
